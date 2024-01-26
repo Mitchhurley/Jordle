@@ -1,14 +1,16 @@
 {% extends "app/layout.html" %}
 
 {% block content %}
-    <h1>{{ question_text }}</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+<h1>{{ question_text }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
     {% if message %}
-    <p>{{ message }}</p>
+<script>
+        alert('{{ message }}');
+</script>
     {% endif %}
 
 {% endblock %}

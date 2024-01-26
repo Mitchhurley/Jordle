@@ -22,4 +22,4 @@ class QuestionAndAnswerForm(forms.ModelForm):
     class Meta:
         model = QuestionAndAnswer
         fields = ['answer_text']
-        exclude = ['pub_date',]
+        exclude = ['pub_date']
