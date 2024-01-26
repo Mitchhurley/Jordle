@@ -48,7 +48,6 @@ def about(request):
         }
     )
 
-
 def question_view(request):
     question_id = random.choice(QuestionAndAnswer.objects.values_list('id', flat=True))
     question_and_answer = get_object_or_404(QuestionAndAnswer, id=question_id)
@@ -56,7 +55,18 @@ def question_view(request):
     if request.method == 'POST':
         form = QuestionAndAnswerForm(request.POST)
         if form.is_valid():
-            form.save()
+            # Get the submitted answer from the form
+            submitted_answer = form.cleaned_data['answer_text']
+            # Check if the submitted answer matches the correct one
+            if submitted_answer == question_and_answer.answer_text:
+                # If the answer is correct, add a success message
+                message = "Correct!"
+            else:
+                # If the answer is incorrect, add an error message
+                message = "Incorrect!"
+            
+            return render(request,  'app/question.html', {'question_text': question_and_answer.question_text, 'form': form, 'message': message})
     else:
-        form = QuestionAndAnswerForm()
-    return render(request,  'app/question.html', {'question_and_answer': question_and_answer, 'form': form})
+        form = QuestionAndAnswerForm(initial={'question': question_and_answer.question_text})
+
+    return render(request,  'app/question.html', {'question_text': question_and_answer.question_text, 'form': form})

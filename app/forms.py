@@ -21,4 +21,5 @@ class BootstrapAuthenticationForm(AuthenticationForm):
 class QuestionAndAnswerForm(forms.ModelForm):
     class Meta:
         model = QuestionAndAnswer
-        fields = ['question_text', 'answer_text', 'pub_date']
+        fields = ['answer_text']
+        exclude = ['pub_date', 'question_text']

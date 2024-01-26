@@ -6,11 +6,15 @@
     <title></title>
 </head>
 <body>
-    <h1>{{ question.question_text }}</h1>
+    <h1>{{ question_text }}</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+
 </body>
 </html>
